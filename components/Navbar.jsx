@@ -55,17 +55,77 @@ export default function Navbar({
   const avatarUrl = customAvatar || profile?.avatar_url || '/images/sumon-profile-icon.jpg';
 
   const notifications = [
-    { id: 1, user: 'Sk Sanju', profileId: 'bejoy', action: 'sent you a friend request.', time: '5m ago', avatar: '/images/Friends/bejoy.jpg' },
-    { id: 2, user: 'Niloy Roy', profileId: 'niloy', action: 'commented on your photo.', time: '1h ago', avatar: '/images/Friends/niloy.jpg' },
-    { id: 3, user: 'Dipu Roy', profileId: 'dipu', action: 'reacted to your post.', time: '2h ago', avatar: '/images/Friends/dipu.jpg' },
-    { id: 4, user: 'Bisuu ʚíɞ', profileId: 'bisu', action: 'posted a new photo.', time: '5h ago', avatar: '/images/Friends/bisu.jpg' },
+    {
+      id: 1,
+      user: 'Sadia Afrin',
+      profileId: 'sadia-afrin',
+      action: 'sent you a friend request.',
+      time: '3m ago',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+    },
+    {
+      id: 2,
+      user: 'Tanvir Ahmed',
+      profileId: 'tanvir-ahmed',
+      action: 'reacted ❤️ to your post.',
+      time: '24m ago',
+      avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80',
+    },
+    {
+      id: 3,
+      user: 'Ayesha Rahman',
+      profileId: 'ayesha-rahman',
+      action: 'commented: "Such an inspiring perspective! ✨"',
+      time: '1h ago',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
+    },
+    {
+      id: 4,
+      user: 'Mahir Faysal',
+      profileId: 'mahir-faysal',
+      action: 'shared a new photo to his feed.',
+      time: '3h ago',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+    },
+    {
+      id: 5,
+      user: 'Nusrat Jahan',
+      profileId: 'nusrat-jahan',
+      action: 'mentioned you in a comment.',
+      time: '5h ago',
+      avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80',
+    },
   ];
 
   const recentChats = [
-    { id: 'touhid', name: 'Touhid Hasan', msg: 'Hey! How are you doing?', time: '2m', avatar: '/images/Friends/touhid.jpg' },
-    { id: 'joydev', name: 'Joydev Roy', msg: 'Are we playing Ludo tonight?', time: '15m', avatar: '/images/Friends/joydev.jpg' },
-    { id: 'emamul', name: 'Emamul Haque Emon', msg: 'Sent an attachment.', time: '1h', avatar: '/images/Friends/emamul.jpg' },
-    { id: 'uttom', name: 'Uttom Roy', msg: 'Check out this new project!', time: '3h', avatar: '/images/Friends/uttom.jpg' },
+    {
+      id: 'ayesha-rahman',
+      name: 'Ayesha Rahman',
+      msg: 'Hey! Did you check out the new design?',
+      time: '2m',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
+    },
+    {
+      id: 'tanvir-ahmed',
+      name: 'Tanvir Ahmed',
+      msg: 'Are we meeting this weekend for coffee? ☕',
+      time: '15m',
+      avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80',
+    },
+    {
+      id: 'sadia-afrin',
+      name: 'Sadia Afrin',
+      msg: 'Just uploaded the new Figma file!',
+      time: '45m',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+    },
+    {
+      id: 'mahir-faysal',
+      name: 'Mahir Faysal',
+      msg: 'The Next.js backend looks super smooth bro.',
+      time: '2h',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+    },
   ];
 
   const handleSaveSettings = () => {

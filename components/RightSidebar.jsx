@@ -4,25 +4,31 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const initialFriends = [
-  { id: 'touhid', name: 'Touhid Hasan', img: '/images/Friends/touhid.jpg' },
-  { id: 'uttom', name: 'Uttom Roy', img: '/images/Friends/uttom.jpg' },
-  { id: 'wasius', name: 'Abu Wasius Shahid', img: '/images/Friends/wasius.jpg' },
-  { id: 'atique', name: 'Atique Shahriar', img: '/images/Friends/atique.jpg' },
-  { id: 'norry', name: 'Nusrat Norry', img: '/images/Friends/norry.jpg' },
-  { id: 'emamul', name: 'Emamul Haque Emon', img: '/images/Friends/emamul.jpg' },
-  { id: 'joydev', name: 'Joydev Roy', img: '/images/Friends/joydev.jpg' },
-  { id: 'nabil', name: 'Nabil Al Tamash', img: '/images/Friends/nabil.jpg' },
+  { id: 'ayesha-rahman', name: 'Ayesha Rahman', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80' },
+  { id: 'tanvir-ahmed', name: 'Tanvir Ahmed', img: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80' },
+  { id: 'sadia-afrin', name: 'Sadia Afrin', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80' },
+  { id: 'mahir-faysal', name: 'Mahir Faysal', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80' },
+  { id: 'nusrat-jahan', name: 'Nusrat Jahan', img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80' },
+  { id: 'rafiqul-islam', name: 'Rafiqul Islam', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80' },
+  { id: 'farhana-islam', name: 'Farhana Islam', img: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80' },
+  { id: 'fahim-shahriar', name: 'Fahim Shahriar', img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80' },
+  { id: 'anika-tabassum', name: 'Anika Tabassum', img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80' },
+  { id: 'samin-yasar', name: 'Samin Yasar', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80' },
+  { id: 'tasnim-zahan', name: 'Tasnim Zahan', img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80' },
+  { id: 'samira-khan', name: 'Samira Khan', img: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80' },
+  { id: 'bisu', name: 'Bisuu ʚíɞ', img: '/images/Friends/bisu.jpg' },
   { id: 'dipu', name: 'Dipu Roy Plabon', img: '/images/Friends/dipu.jpg' },
-  { id: 'nahid', name: 'Nahid Rahman', img: '/images/Friends/nahid.jpg' },
-  { id: 'sraboni', name: 'Sraboni Aktar', img: '/images/Friends/sraboni.jpg' },
-  { id: 'sujon', name: 'Sujon Roy', img: '/images/Friends/sujon.jpg' },
+  { id: 'joydev', name: 'Joydev Roy', img: '/images/Friends/joydev.jpg' },
+  { id: 'uttom', name: 'Uttom Roy', img: '/images/Friends/uttom.jpg' },
 ];
 
 export default function RightSidebar({ onOpenChat }) {
   const [friendRequest, setFriendRequest] = useState({
-    name: 'Sk Sanju',
-    img: '/images/Friends/bejoy.jpg',
-    mutual: '3 mutual friends',
+    id: 'sadia-afrin',
+    name: 'Sadia Afrin',
+    img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+    mutual: '5 mutual friends',
+    mutualAvatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=80&auto=format&fit=crop&q=80',
     status: 'pending', // 'pending', 'confirmed', 'deleted'
   });
 
@@ -48,7 +54,7 @@ export default function RightSidebar({ onOpenChat }) {
           </div>
 
           <div className="flex main-left-content-bg" style={{ padding: '8px', borderRadius: '8px' }}>
-            <Link href="/profile/bejoy">
+            <Link href={`/profile/${friendRequest.id}`}>
               <img
                 src={friendRequest.img}
                 alt={friendRequest.name}
@@ -56,14 +62,14 @@ export default function RightSidebar({ onOpenChat }) {
               />
             </Link>
             <div style={{ flex: 1 }}>
-              <Link href="/profile/bejoy" style={{ textDecoration: 'none' }}>
+              <Link href={`/profile/${friendRequest.id}`} style={{ textDecoration: 'none' }}>
                 <p className="color" style={{ fontWeight: '600' }}>{friendRequest.name}</p>
               </Link>
               <div className="flex" style={{ margin: '2px 0 6px 0' }}>
                 <img
-                  src="/images/Friends/joydev.jpg"
-                  alt="Joydev"
-                  style={{ height: '18px', width: '18px', borderRadius: '50%', marginRight: '4px' }}
+                  src={friendRequest.mutualAvatar || '/images/Friends/joydev.jpg'}
+                  alt="Mutual"
+                  style={{ height: '18px', width: '18px', borderRadius: '50%', marginRight: '4px', objectFit: 'cover' }}
                 />
                 <p style={{ fontSize: '12px', color: '#65676b' }}>{friendRequest.mutual}</p>
               </div>
@@ -100,7 +106,7 @@ export default function RightSidebar({ onOpenChat }) {
           style={{ height: '36px', width: '36px', borderRadius: '50%' }}
         />
         <p className="birth-para">
-          <span className="color-bold">Taposh Roy</span> and <span className="color-bold">Biplob Adhikari</span> have birthdays today.
+          <span className="color-bold">Ayesha Rahman</span> and <span className="color-bold">Rafiqul Islam</span> have birthdays today.
         </p>
       </div>
 
