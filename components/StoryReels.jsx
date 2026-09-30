@@ -4,17 +4,62 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 const initialStories = [
-  { id: 1, profileId: 'emamul', name: 'Emamul Hak Meon', bg: '/images/Friends/emamul.jpg', avatar: '/images/Friends/emamul.jpg' },
-  { id: 2, profileId: 'uttom', name: 'Uttom Roy', bg: '/images/Friends/uttom.jpg', avatar: '/images/Friends/uttom.jpg' },
-  { id: 3, profileId: 'wasius', name: 'Abu Wasius Shahid', bg: '/images/Friends/wasius.jpg', avatar: '/images/Friends/wasius.jpg' },
-  { id: 4, profileId: 'joydev', name: 'Joydev Roy', bg: '/images/Friends/joydev.jpg', avatar: '/images/Friends/joydev.jpg' },
-  { id: 5, profileId: 'bisu', name: 'Bisuu ʚíɞ', bg: '/images/Friends-Post/bisu.jpg', avatar: '/images/Friends/bisu.jpg' },
+  {
+    id: 1,
+    profileId: 'ayesha-rahman',
+    name: 'Ayesha Rahman',
+    bg: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&auto=format&fit=crop&q=80',
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 2,
+    profileId: 'tanvir-ahmed',
+    name: 'Tanvir Ahmed',
+    bg: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format&fit=crop&q=80',
+    avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 3,
+    profileId: 'sadia-afrin',
+    name: 'Sadia Afrin',
+    bg: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&auto=format&fit=crop&q=80',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 4,
+    profileId: 'mahir-faysal',
+    name: 'Mahir Faysal',
+    bg: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&auto=format&fit=crop&q=80',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 5,
+    profileId: 'nusrat-jahan',
+    name: 'Nusrat Jahan',
+    bg: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&auto=format&fit=crop&q=80',
+    avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 6,
+    profileId: 'rafiqul-islam',
+    name: 'Rafiqul Islam',
+    bg: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&auto=format&fit=crop&q=80',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 7,
+    profileId: 'farhana-islam',
+    name: 'Farhana Islam',
+    bg: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=600&auto=format&fit=crop&q=80',
+    avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&auto=format&fit=crop&q=80',
+  },
 ];
 
 const reelsData = [
-  { id: 101, title: 'Amazing Nature Trip 🌲', bg: '/images/Friends-Post/dipu.jpg', creator: 'Dipu Roy' },
-  { id: 102, title: 'Gaming Highlights 🎮', bg: '/images/chess.png', creator: 'Chess Master' },
-  { id: 103, title: 'Weekend Party Vibes 🎉', bg: '/images/Friends-Post/niloy.jpg', creator: 'Niloy Roy' },
+  { id: 101, title: 'Mountain Escape 🏔️', bg: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&auto=format&fit=crop&q=80', creator: 'Tanvir Ahmed' },
+  { id: 102, title: 'Morning Coffee Brew ☕', bg: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&auto=format&fit=crop&q=80', creator: 'Sadia Afrin' },
+  { id: 103, title: 'Roadtrip Sunset 🚗🌅', bg: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&auto=format&fit=crop&q=80', creator: 'Ayesha Rahman' },
+  { id: 104, title: 'Coding Late Nights 💻✨', bg: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&auto=format&fit=crop&q=80', creator: 'Mahir Faysal' },
 ];
 
 export default function StoryReels({ user, profile }) {
