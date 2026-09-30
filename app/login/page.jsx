@@ -33,6 +33,46 @@ export default function LoginPage() {
       }
 
       if (data?.user) {
+        try {
+          const { data: prof } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', data.user.id)
+            .single();
+
+          const meta = data.user.user_metadata || {};
+          const isFemale = meta.gender === 'Female';
+          const defaultAvatar = isFemale
+            ? 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80'
+            : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80';
+
+          const resolvedName = prof?.full_name || meta.full_name || data.user.email?.split('@')[0] || 'Facebook User';
+          const resolvedAvatar = prof?.avatar_url || meta.avatar_url || defaultAvatar;
+
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('fb_my_name', resolvedName);
+            localStorage.setItem('fb_my_avatar', resolvedAvatar);
+            if (prof?.bio || meta.bio) localStorage.setItem('fb_my_bio', prof?.bio || meta.bio);
+            if (prof?.cover_url) localStorage.setItem('fb_my_cover', prof.cover_url);
+            window.dispatchEvent(new Event('userProfileUpdated'));
+          }
+
+          // If no profile row exists, create it
+          if (!prof) {
+            await supabase.from('profiles').upsert({
+              id: data.user.id,
+              full_name: resolvedName,
+              first_name: meta.first_name || '',
+              last_name: meta.last_name || '',
+              gender: meta.gender || 'Not specified',
+              avatar_url: resolvedAvatar,
+              bio: meta.bio || `Hello! I'm ${meta.first_name || 'new here'}, welcome to my Facebook profile.`
+            });
+          }
+        } catch (syncErr) {
+          console.warn('Profile sync on login warning:', syncErr);
+        }
+
         router.push('/');
         router.refresh();
       }

@@ -413,19 +413,54 @@ export default function Home() {
 
   // Load User & Session from Supabase
   useEffect(() => {
+    const syncUserProfile = async (sessionUser) => {
+      if (!sessionUser) return null;
+      try {
+        let { data: profileData } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', sessionUser.id)
+          .single();
+
+        if (!profileData) {
+          const meta = sessionUser.user_metadata || {};
+          const isFemale = meta.gender === 'Female';
+          const defaultAvatar = isFemale
+            ? 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80'
+            : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80';
+
+          const fallbackProfile = {
+            id: sessionUser.id,
+            full_name: meta.full_name || meta.first_name || sessionUser.email?.split('@')[0] || 'Facebook User',
+            first_name: meta.first_name || '',
+            last_name: meta.last_name || '',
+            gender: meta.gender || 'Not specified',
+            avatar_url: meta.avatar_url || defaultAvatar,
+            bio: meta.bio || `Hello! I'm ${meta.first_name || 'new here'}, welcome to my Facebook profile.`
+          };
+
+          const { data: created } = await supabase.from('profiles').upsert(fallbackProfile).select().single();
+          profileData = created || fallbackProfile;
+        }
+        return profileData;
+      } catch (err) {
+        console.warn('Profile sync error:', err);
+        const meta = sessionUser.user_metadata || {};
+        return {
+          id: sessionUser.id,
+          full_name: meta.full_name || sessionUser.email?.split('@')[0] || 'Facebook User',
+          avatar_url: meta.avatar_url || '/images/sumon-profile-icon.jpg',
+        };
+      }
+    };
+
     const fetchSession = async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession();
         if (session?.user) {
           setUser(session.user);
-          const { data: profileData } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('id', session.user.id)
-            .single();
-          if (profileData) {
-            setProfile(profileData);
-          }
+          const prof = await syncUserProfile(session.user);
+          if (prof) setProfile(prof);
         }
       } catch (e) {
         console.warn('Session fetch handled:', e);
@@ -437,16 +472,8 @@ export default function Home() {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (session?.user) {
         setUser(session.user);
-        try {
-          const { data: profileData } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('id', session.user.id)
-            .single();
-          if (profileData) setProfile(profileData);
-        } catch (e) {
-          console.error(e);
-        }
+        const prof = await syncUserProfile(session.user);
+        if (prof) setProfile(prof);
       } else {
         setUser(null);
         setProfile(null);

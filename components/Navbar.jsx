@@ -71,6 +71,12 @@ export default function Navbar({
   }, []);
 
   const handleLogout = async () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('fb_my_name');
+      localStorage.removeItem('fb_my_avatar');
+      localStorage.removeItem('fb_my_bio');
+      localStorage.removeItem('fb_my_cover');
+    }
     await supabase.auth.signOut();
     window.location.reload();
   };
@@ -79,8 +85,14 @@ export default function Navbar({
     setOpenDropdown((prev) => (prev === name ? null : name));
   };
 
-  const displayName = customName || profile?.full_name || profile?.first_name || user?.email?.split('@')[0] || 'Sumon Roy';
-  const avatarUrl = customAvatar || profile?.avatar_url || '/images/sumon-profile-icon.jpg';
+  const userFullName = profile?.full_name || profile?.first_name || user?.user_metadata?.full_name;
+  const userAvatar = profile?.avatar_url || user?.user_metadata?.avatar_url;
+  const displayName = user
+    ? (userFullName || customName || user.email?.split('@')[0] || 'Facebook User')
+    : (customName || 'Sumon Roy');
+  const avatarUrl = user
+    ? (userAvatar || customAvatar || '/images/sumon-profile-icon.jpg')
+    : (customAvatar || '/images/sumon-profile-icon.jpg');
 
   const notifications = [
     {

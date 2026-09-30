@@ -32,8 +32,14 @@ export default function CreatePost({ user, profile, onPostCreated }) {
     return () => window.removeEventListener('userProfileUpdated', updateProfile);
   }, []);
 
-  const displayName = customName || profile?.first_name || profile?.full_name || user?.email?.split('@')[0] || 'Sumon';
-  const avatarUrl = customAvatar || profile?.avatar_url || '/images/sumon-profile-icon.jpg';
+  const userFullName = profile?.first_name || profile?.full_name || user?.user_metadata?.first_name || user?.user_metadata?.full_name;
+  const userAvatar = profile?.avatar_url || user?.user_metadata?.avatar_url;
+  const displayName = user
+    ? (userFullName || customName || user.email?.split('@')[0] || 'Facebook User')
+    : (customName || 'Sumon');
+  const avatarUrl = user
+    ? (userAvatar || customAvatar || '/images/sumon-profile-icon.jpg')
+    : (customAvatar || '/images/sumon-profile-icon.jpg');
 
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];

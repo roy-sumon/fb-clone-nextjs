@@ -34,6 +34,14 @@ export default function SignupPage() {
       const fullName = `${firstName} ${lastName}`.trim();
       const dob = `${day} ${month} ${year}`;
 
+      const chosenAvatar = gender === 'Female'
+        ? 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80'
+        : gender === 'Male'
+        ? 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80'
+        : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80';
+
+      const defaultBio = `Hello! I'm ${firstName}, welcome to my Facebook profile.`;
+
       const { data, error: authError } = await supabase.auth.signUp({
         email,
         password,
@@ -44,7 +52,8 @@ export default function SignupPage() {
             full_name: fullName,
             gender,
             date_of_birth: dob,
-            avatar_url: '/images/sumon-profile-icon.jpg',
+            avatar_url: chosenAvatar,
+            bio: defaultBio,
           },
         },
       });
@@ -53,16 +62,41 @@ export default function SignupPage() {
         throw authError;
       }
 
+      // Upsert into public.profiles for instant profile availability
+      if (data?.user?.id) {
+        try {
+          await supabase.from('profiles').upsert({
+            id: data.user.id,
+            first_name: firstName,
+            last_name: lastName,
+            full_name: fullName,
+            gender: gender,
+            avatar_url: chosenAvatar,
+            bio: defaultBio,
+          });
+        } catch (profileErr) {
+          console.warn('Profile upsert warning:', profileErr);
+        }
+      }
+
+      // Set localStorage for immediate client-side responsiveness
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('fb_my_name', fullName);
+        localStorage.setItem('fb_my_avatar', chosenAvatar);
+        localStorage.setItem('fb_my_bio', defaultBio);
+        window.dispatchEvent(new Event('userProfileUpdated'));
+      }
+
       if (data?.session) {
         // Logged in immediately (if email confirmation is disabled in Supabase)
         router.push('/');
         router.refresh();
       } else {
         // Confirmation email sent or awaiting confirmation
-        setSuccess('Account created successfully! If email confirmation is enabled, please check your inbox, or you can now Log in.');
+        setSuccess('Account created successfully! You can now log in to your new Facebook account.');
         setTimeout(() => {
           router.push('/login');
-        }, 2000);
+        }, 1500);
       }
     } catch (err) {
       console.error('Signup error:', err);

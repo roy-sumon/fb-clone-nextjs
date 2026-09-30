@@ -61,25 +61,45 @@ export default function ProfilePage() {
         (profileId === 'me' ? localStorage.getItem('fb_my_cover') : null);
 
       // 2. Fetch Profile to display
+      let activeTargetId = profileId;
       if (profileId === 'me' || (session?.user && profileId === session.user.id)) {
         if (session?.user) {
+          activeTargetId = session.user.id;
           const { data: userProf } = await supabase
             .from('profiles')
             .select('*')
             .eq('id', session.user.id)
             .single();
 
-          const fallback = getMockProfile('sumon-roy');
+          const userMeta = session.user.user_metadata || {};
+          const isFemale = userMeta.gender === 'Female';
+          const defaultAvatar = isFemale
+            ? 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80'
+            : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80';
+          const defaultCover = 'https://images.unsplash.com/photo-1707343843437-caacff5cfa74?w=1200&auto=format&fit=crop&q=80';
+
+          const resolvedFullName = userProf?.full_name || userMeta.full_name || session.user.email?.split('@')[0] || 'Facebook User';
+          const resolvedAvatar = customAvatar || userProf?.avatar_url || userMeta.avatar_url || defaultAvatar;
+          const resolvedCover = customCover || userProf?.cover_url || defaultCover;
+          const resolvedBio = userProf?.bio || userMeta.bio || `Hello! I'm ${userMeta.first_name || resolvedFullName.split(' ')[0]}, welcome to my Facebook profile.`;
+
           const merged = {
-            ...fallback,
-            ...(userProf || {}),
             id: session.user.id,
-            full_name: userProf?.full_name || session.user.email?.split('@')[0] || fallback.full_name,
-            avatar_url: customAvatar || userProf?.avatar_url || fallback.avatar_url,
-            cover_url: customCover || fallback.cover_url,
+            full_name: resolvedFullName,
+            first_name: userProf?.first_name || userMeta.first_name || '',
+            last_name: userProf?.last_name || userMeta.last_name || '',
+            gender: userProf?.gender || userMeta.gender || 'Not specified',
+            avatar_url: resolvedAvatar,
+            cover_url: resolvedCover,
+            bio: resolvedBio,
+            work: userProf?.work || '',
+            education: userProf?.education || '',
+            lives_in: userProf?.lives_in || '',
+            from: userProf?.from || '',
+            friends_count: userProf?.friends_count || 0,
           };
           setProfileData(merged);
-          setBioText(merged.bio || '');
+          setBioText(merged.bio);
           setEditName(merged.full_name);
           setEditWork(merged.work || '');
           setEditEducation(merged.education || '');
@@ -108,15 +128,25 @@ export default function ProfilePage() {
           .single();
 
         if (dbProf) {
-          const fallback = getMockProfile(dbProf.full_name || 'sumon-roy');
+          const isFemale = dbProf.gender === 'Female';
+          const defaultAvatar = isFemale
+            ? 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80'
+            : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80';
+          const defaultCover = 'https://images.unsplash.com/photo-1707343843437-caacff5cfa74?w=1200&auto=format&fit=crop&q=80';
+
           const merged = {
-            ...fallback,
+            work: '',
+            education: '',
+            lives_in: '',
+            from: '',
+            friends_count: 0,
             ...dbProf,
-            avatar_url: customAvatar || dbProf.avatar_url || fallback.avatar_url,
-            cover_url: customCover || fallback.cover_url,
+            avatar_url: customAvatar || dbProf.avatar_url || defaultAvatar,
+            cover_url: customCover || dbProf.cover_url || defaultCover,
+            bio: dbProf.bio || `Welcome to ${dbProf.full_name}'s profile.`,
           };
           setProfileData(merged);
-          setBioText(dbProf.bio || fallback.bio);
+          setBioText(merged.bio);
           setEditName(merged.full_name);
           setEditWork(merged.work || '');
           setEditEducation(merged.education || '');
@@ -139,42 +169,27 @@ export default function ProfilePage() {
         }
       }
 
-      // 3. Load posts
-      const { data: userPosts } = await supabase
-        .from('posts')
-        .select(`
-          id, content, image_url, created_at, user_id,
-          profiles:user_id (id, full_name, avatar_url),
-          likes (id, user_id, reaction_type),
-          comments (id, content, created_at, profiles:user_id (full_name, avatar_url))
-        `)
-        .order('created_at', { ascending: false });
+      // 3. Load user-specific posts
+      try {
+        const { data: userPosts } = await supabase
+          .from('posts')
+          .select(`
+            id, content, image_url, created_at, user_id,
+            profiles:user_id (id, full_name, avatar_url),
+            likes (id, user_id, reaction_type),
+            comments (id, content, created_at, profiles:user_id (full_name, avatar_url))
+          `)
+          .eq('user_id', activeTargetId)
+          .order('created_at', { ascending: false });
 
-      if (userPosts && userPosts.length > 0) {
-        setPosts(userPosts);
-      } else {
-        setPosts([
-          {
-            id: `p-${profileId}-1`,
-            user_id: profileId,
-            content: `Excited to connect with everyone on Facebook! 🎉`,
-            image_url: customCover || '/images/Friends-Post/bisu.jpg',
-            created_at: new Date(Date.now() - 3600000 * 24).toISOString(),
-            profiles: {
-              full_name: profileData?.full_name || 'User',
-              avatar_url: customAvatar || profileData?.avatar_url || '/images/sumon-profile-icon.jpg',
-            },
-            likes: [{ id: '1', user_id: 'u1', reaction_type: 'like' }, { id: '2', user_id: 'u2', reaction_type: 'love' }],
-            comments: [
-              {
-                id: 'c1',
-                content: 'Welcome to Facebook!',
-                created_at: new Date().toISOString(),
-                profiles: { full_name: 'Niloy Roy', avatar_url: '/images/Friends/niloy.jpg' },
-              },
-            ],
-          },
-        ]);
+        if (userPosts && userPosts.length > 0) {
+          setPosts(userPosts);
+        } else {
+          setPosts([]);
+        }
+      } catch (postErr) {
+        console.warn('Profile posts load warning:', postErr);
+        setPosts([]);
       }
     };
 
@@ -191,12 +206,19 @@ export default function ProfilePage() {
     const file = e.target.files?.[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onloadend = () => {
+    reader.onloadend = async () => {
       const dataUrl = reader.result;
       setProfileData((prev) => ({ ...prev, cover_url: dataUrl }));
       localStorage.setItem(`fb_cover_${profileId}`, dataUrl);
       if (isOwnProfile) {
         localStorage.setItem('fb_my_cover', dataUrl);
+        if (currentUser) {
+          try {
+            await supabase.from('profiles').update({ cover_url: dataUrl }).eq('id', currentUser.id);
+          } catch (err) {
+            console.warn(err);
+          }
+        }
       }
     };
     reader.readAsDataURL(file);
@@ -227,7 +249,7 @@ export default function ProfilePage() {
   };
 
   // Save Edit Profile Modal
-  const handleSaveProfile = () => {
+  const handleSaveProfile = async () => {
     setProfileData((prev) => ({
       ...prev,
       full_name: editName,
@@ -240,6 +262,19 @@ export default function ProfilePage() {
     if (isOwnProfile) {
       localStorage.setItem('fb_my_name', editName);
       window.dispatchEvent(new Event('userProfileUpdated'));
+      if (currentUser) {
+        try {
+          await supabase.from('profiles').update({
+            full_name: editName,
+            work: editWork,
+            education: editEducation,
+            lives_in: editLivesIn,
+            from: editFrom,
+          }).eq('id', currentUser.id);
+        } catch (err) {
+          console.warn(err);
+        }
+      }
     }
 
     setEditProfileOpen(false);
@@ -596,9 +631,19 @@ export default function ProfilePage() {
                       Cancel
                     </button>
                     <button
-                      onClick={() => {
+                      onClick={async () => {
                         setIsEditingBio(false);
                         setProfileData((prev) => ({ ...prev, bio: bioText }));
+                        if (isOwnProfile) {
+                          localStorage.setItem('fb_my_bio', bioText);
+                          if (currentUser) {
+                            try {
+                              await supabase.from('profiles').update({ bio: bioText }).eq('id', currentUser.id);
+                            } catch (err) {
+                              console.warn(err);
+                            }
+                          }
+                        }
                       }}
                       style={{
                         padding: '6px 12px',
