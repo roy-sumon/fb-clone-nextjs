@@ -34,15 +34,17 @@ This project started as a static HTML/CSS landing page clone and evolved into a 
 - Switch between **Stories** and **Reels** tabs.
 
 ### 5. Profiles (`/profile/[id]` & `/profile/me`)
-- Dedicated profile page for every user and friend.
+- Dedicated profile page for every user and friend with realistic male & female personas.
 - **Customization:** Upload and change your Profile Picture and Cover Photo directly with instant preview.
+- **Interactive Tabs:** Switch seamlessly between **Posts**, **About** (Overview, Work & Education, Places Lived, Contact & Basic Info), **Friends** (searchable directory), **Photos** (full gallery), and **Videos**.
 - **Intro & Bio:** Edit your bio and view details (Work, Education, Location, Joined date).
-- **Photos & Friends Grids:** View user photos and friend list thumbnails.
 - Timeline feed showing posts filtered to that specific profile.
 
 ### 6. Friends Hub (`/friends`) & Suggestions
-- **People You May Know:** Horizontal suggestion carousel right in the feed + dedicated Friends Hub page.
+- **Realistic Male & Female Network:** 20+ authentic profiles with high-resolution portraits, bios, education, and career backgrounds.
+- **People You May Know:** Horizontal suggestion carousel right in the feed + dedicated Friends Hub page with working "Add Friend" actions.
 - **Friend Requests:** Working "Confirm" and "Delete" actions with real-time UI feedback.
+- **All Friends Directory:** Searchable friend list with direct one-click Messenger chatting.
 - Clickable avatars and names across the entire site that navigate straight to user profiles.
 
 ### 7. Floating Messenger Chat
