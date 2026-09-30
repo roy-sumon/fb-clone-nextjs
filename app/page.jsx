@@ -186,6 +186,220 @@ const defaultInitialPosts = [
       },
     ],
   },
+  {
+    id: 'post-farhana-1',
+    user_id: 'farhana-islam',
+    content: 'Rainy Sunday morning with a warm cup of Assam tea and a classic novel ☕📖🌿 There is something so peaceful about the sound of raindrops tapping against the window sill. Wishing everyone a restful weekend!',
+    image_url: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=900&auto=format&fit=crop&q=80',
+    created_at: new Date(Date.now() - 3600000 * 52).toISOString(),
+    profiles: {
+      id: 'farhana-islam',
+      full_name: 'Farhana Islam',
+      avatar_url: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=300&auto=format&fit=crop&q=80',
+    },
+    likes: [
+      { id: 'l15', user_id: 'sadia-afrin', reaction_type: 'love' },
+      { id: 'l16', user_id: 'anika-tabassum', reaction_type: 'care' },
+      { id: 'l17', user_id: 'ayesha-rahman', reaction_type: 'like' },
+    ],
+    comments: [
+      {
+        id: 'c7',
+        user_id: 'sadia-afrin',
+        content: 'Cozy vibes! Which book is this Farhana?',
+        created_at: new Date(Date.now() - 3600000 * 40).toISOString(),
+        profiles: { id: 'sadia-afrin', full_name: 'Sadia Afrin', avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80' },
+      },
+    ],
+  },
+  {
+    id: 'post-rafiqul-1',
+    user_id: 'rafiqul-islam',
+    content: 'Summit conquered! 🏔️✨ 3,172 feet above sea level at Keokradong, Bandarban. Watching the cloud ocean roll beneath our tents at 6:00 AM made every kilometer of that steep rocky trek worth it. Nature never fails to humble us. #HikingBangladesh',
+    image_url: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&auto=format&fit=crop&q=80',
+    created_at: new Date(Date.now() - 3600000 * 60).toISOString(),
+    profiles: {
+      id: 'rafiqul-islam',
+      full_name: 'Rafiqul Islam',
+      avatar_url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&auto=format&fit=crop&q=80',
+    },
+    likes: [
+      { id: 'l18', user_id: 'tanvir-ahmed', reaction_type: 'wow' },
+      { id: 'l19', user_id: 'mahir-faysal', reaction_type: 'like' },
+      { id: 'l20', user_id: 'fahim-shahriar', reaction_type: 'love' },
+    ],
+    comments: [
+      {
+        id: 'c8',
+        user_id: 'mahir-faysal',
+        content: 'Incredible view bhai! Next tour e amio jabo.',
+        created_at: new Date(Date.now() - 3600000 * 55).toISOString(),
+        profiles: { id: 'mahir-faysal', full_name: 'Mahir Faysal', avatar_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=80' },
+      },
+    ],
+  },
+  {
+    id: 'post-anika-1',
+    user_id: 'anika-tabassum',
+    content: 'Old Dhaka through watercolor strokes 🎨🖌️ Spent this afternoon sketching the vibrant lanes of Shankhari Bazar. Every corner here has centuries of heritage etched into its brick walls. How do you guys like the color palette?',
+    image_url: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=900&auto=format&fit=crop&q=80',
+    created_at: new Date(Date.now() - 3600000 * 72).toISOString(),
+    profiles: {
+      id: 'anika-tabassum',
+      full_name: 'Anika Tabassum',
+      avatar_url: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&auto=format&fit=crop&q=80',
+    },
+    likes: [
+      { id: 'l21', user_id: 'ayesha-rahman', reaction_type: 'love' },
+      { id: 'l22', user_id: 'nusrat-jahan', reaction_type: 'care' },
+    ],
+    comments: [
+      {
+        id: 'c9',
+        user_id: 'ayesha-rahman',
+        content: 'You are so gifted Anika! Would love to buy a framed print of this! 😍',
+        created_at: new Date(Date.now() - 3600000 * 68).toISOString(),
+        profiles: { id: 'ayesha-rahman', full_name: 'Ayesha Rahman', avatar_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&auto=format&fit=crop&q=80' },
+      },
+    ],
+  },
+  {
+    id: 'post-fahim-1',
+    user_id: 'fahim-shahriar',
+    content: 'Thrilled to share that our developer platform has officially crossed 50,000 active developers worldwide! 🚀🤖 Deeply grateful to our brilliant engineering team and everyone in the tech community who believed in our vision from Day 1. Onwards and upwards! #TechBangladesh #StartupMilestone',
+    image_url: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&auto=format&fit=crop&q=80',
+    created_at: new Date(Date.now() - 3600000 * 80).toISOString(),
+    profiles: {
+      id: 'fahim-shahriar',
+      full_name: 'Fahim Shahriar',
+      avatar_url: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&auto=format&fit=crop&q=80',
+    },
+    likes: [
+      { id: 'l23', user_id: 'tanvir-ahmed', reaction_type: 'like' },
+      { id: 'l24', user_id: 'samin-yasar', reaction_type: 'love' },
+      { id: 'l25', user_id: 'mahir-faysal', reaction_type: 'like' },
+    ],
+    comments: [
+      {
+        id: 'c10',
+        user_id: 'tanvir-ahmed',
+        content: 'Huge milestone Fahim! Well deserved success bro! 🔥',
+        created_at: new Date(Date.now() - 3600000 * 76).toISOString(),
+        profiles: { id: 'tanvir-ahmed', full_name: 'Tanvir Ahmed', avatar_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=80' },
+      },
+    ],
+  },
+  {
+    id: 'post-samin-1',
+    user_id: 'samin-yasar',
+    content: 'Weekend culinary project: Handcrafted 48-hour fermented sourdough Neapolitan pizza! 🍕🔥 High hydration dough, San Marzano tomato sauce, fresh mozzarella and basil leaves from our balcony garden. The leoparding on this crust came out perfect.',
+    image_url: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=900&auto=format&fit=crop&q=80',
+    created_at: new Date(Date.now() - 3600000 * 90).toISOString(),
+    profiles: {
+      id: 'samin-yasar',
+      full_name: 'Samin Yasar',
+      avatar_url: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&auto=format&fit=crop&q=80',
+    },
+    likes: [
+      { id: 'l26', user_id: 'sadia-afrin', reaction_type: 'love' },
+      { id: 'l27', user_id: 'bisu', reaction_type: 'haha' },
+      { id: 'l28', user_id: 'farhana-islam', reaction_type: 'like' },
+    ],
+    comments: [
+      {
+        id: 'c11',
+        user_id: 'sadia-afrin',
+        content: 'Save a slice for us next time Samin! Looks restaurant grade! 🤤',
+        created_at: new Date(Date.now() - 3600000 * 85).toISOString(),
+        profiles: { id: 'sadia-afrin', full_name: 'Sadia Afrin', avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80' },
+      },
+    ],
+  },
+  {
+    id: 'post-tasnim-1',
+    user_id: 'tasnim-zahan',
+    content: 'Golden hours by the Bay of Bengal 🌊🌅 Barefoot walks on the damp sands of Cox\'s Bazar as gentle waves wash over. Sometimes all we need is the rhythmic sound of the ocean to clear our minds and recharge.',
+    image_url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&auto=format&fit=crop&q=80',
+    created_at: new Date(Date.now() - 3600000 * 105).toISOString(),
+    profiles: {
+      id: 'tasnim-zahan',
+      full_name: 'Tasnim Zahan',
+      avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80',
+    },
+    likes: [
+      { id: 'l29', user_id: 'ayesha-rahman', reaction_type: 'love' },
+      { id: 'l30', user_id: 'farhana-islam', reaction_type: 'like' },
+    ],
+    comments: [],
+  },
+  {
+    id: 'post-samira-1',
+    user_id: 'samira-khan',
+    content: 'Adopted this little bundle of joy from the animal shelter today! 🐾 Meet Mochi 🐱 She is already exploring every nook and cranny of the living room and purring non-stop. Any cat parent tips are warmly welcomed in the comments!',
+    image_url: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=900&auto=format&fit=crop&q=80',
+    created_at: new Date(Date.now() - 3600000 * 120).toISOString(),
+    profiles: {
+      id: 'samira-khan',
+      full_name: 'Samira Khan',
+      avatar_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&auto=format&fit=crop&q=80',
+    },
+    likes: [
+      { id: 'l31', user_id: 'anika-tabassum', reaction_type: 'love' },
+      { id: 'l32', user_id: 'farhana-islam', reaction_type: 'care' },
+      { id: 'l33', user_id: 'tanvir-ahmed', reaction_type: 'like' },
+    ],
+    comments: [
+      {
+        id: 'c12',
+        user_id: 'anika-tabassum',
+        content: 'She is so precious!! Look at those big green eyes 🥺💕',
+        created_at: new Date(Date.now() - 3600000 * 110).toISOString(),
+        profiles: { id: 'anika-tabassum', full_name: 'Anika Tabassum', avatar_url: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&auto=format&fit=crop&q=80' },
+      },
+    ],
+  },
+  {
+    id: 'post-rashed-1',
+    user_id: 'rashed-karim',
+    content: 'Hatirjheel morning cycling circuit done! 🚴‍♂️ 25 km before 7:30 AM. Crisp morning air, no traffic honking, and the sun rising over the lakes. Best way to start any day! #CyclingCommunity #DhakaRiders',
+    image_url: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=900&auto=format&fit=crop&q=80',
+    created_at: new Date(Date.now() - 3600000 * 135).toISOString(),
+    profiles: {
+      id: 'rashed-karim',
+      full_name: 'Rashed Karim',
+      avatar_url: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=300&auto=format&fit=crop&q=80',
+    },
+    likes: [
+      { id: 'l34', user_id: 'tanvir-ahmed', reaction_type: 'like' },
+      { id: 'l35', user_id: 'rafiqul-islam', reaction_type: 'care' },
+    ],
+    comments: [],
+  },
+  {
+    id: 'post-dipu-1',
+    user_id: 'dipu',
+    content: 'Historic evening walk through the grand Lalbagh Fort garden. Mughal craftsmanship in the heart of Dhaka will never stop inspiring me. 🏰✨ Photography is the pause button of life.',
+    image_url: '/images/Friends-Post/dipu.jpg',
+    created_at: new Date(Date.now() - 3600000 * 150).toISOString(),
+    profiles: {
+      id: 'dipu',
+      full_name: 'Dipu Roy Plabon',
+      avatar_url: '/images/Friends/dipu.jpg',
+    },
+    likes: [
+      { id: 'l36', user_id: 'bisu', reaction_type: 'love' },
+      { id: 'l37', user_id: 'niloy', reaction_type: 'like' },
+    ],
+    comments: [
+      {
+        id: 'c13',
+        user_id: 'bisu',
+        content: 'Awesome angle bro! Lighting is great.',
+        created_at: new Date(Date.now() - 3600000 * 140).toISOString(),
+        profiles: { id: 'bisu', full_name: 'Bisuu ʚíɞ', avatar_url: '/images/Friends/bisu.jpg' },
+      },
+    ],
+  },
 ];
 
 export default function Home() {
@@ -262,7 +476,10 @@ export default function Home() {
         .order('created_at', { ascending: false });
 
       if (!error && data && data.length > 0) {
-        setPosts(data);
+        // Merge Supabase user posts with defaultInitialPosts so the feed is never wiped or truncated
+        const dbPostIds = new Set(data.map((p) => p.id));
+        const merged = [...data, ...defaultInitialPosts.filter((dp) => !dbPostIds.has(dp.id))];
+        setPosts(merged);
       }
     } catch (err) {
       console.warn('Supabase posts loaded with initial feed:', err);
@@ -307,7 +524,7 @@ export default function Home() {
   });
 
   return (
-    <div>
+    <div className="app-page-wrapper">
       {/* Top Navbar */}
       <Navbar
         user={user}
