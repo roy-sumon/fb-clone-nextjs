@@ -12,10 +12,39 @@ export default function FriendsPage() {
   const [profile, setProfile] = useState(null);
   const [activeTab, setActiveTab] = useState('suggestions'); // 'requests', 'suggestions', 'all'
   const [requests, setRequests] = useState([
-    { id: 'bejoy', name: 'Sk Sanju', avatar: '/images/Friends/bejoy.jpg', mutual: '3 mutual friends', status: 'pending' },
-    { id: 'bisu', name: 'Bisuu ʚíɞ', avatar: '/images/Friends/bisu.jpg', mutual: '7 mutual friends', status: 'pending' },
+    {
+      id: 'sadia-afrin',
+      name: 'Sadia Afrin',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80',
+      mutual: '5 mutual friends',
+      status: 'pending',
+    },
+    {
+      id: 'tanvir-ahmed',
+      name: 'Tanvir Ahmed',
+      avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&auto=format&fit=crop&q=80',
+      mutual: '12 mutual friends',
+      status: 'pending',
+    },
+    {
+      id: 'farhana-islam',
+      name: 'Farhana Islam',
+      avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=300&auto=format&fit=crop&q=80',
+      mutual: '3 mutual friends',
+      status: 'pending',
+    },
+    {
+      id: 'bisu',
+      name: 'Bisuu ʚíɞ',
+      avatar: '/images/Friends/bisu.jpg',
+      mutual: '7 mutual friends',
+      status: 'pending',
+    },
   ]);
-  const [suggestions, setSuggestions] = useState(allMockUsers.slice(3, 15));
+  const [suggestions, setSuggestions] = useState(
+    allMockUsers.filter((u) => u.id !== 'sumon-roy' && !['sadia-afrin', 'tanvir-ahmed', 'farhana-islam', 'bisu'].includes(u.id))
+  );
+  const [friendsSearch, setFriendsSearch] = useState('');
   const [sentRequests, setSentRequests] = useState({});
   const [activeChat, setActiveChat] = useState(null);
 
@@ -312,7 +341,7 @@ export default function FriendsPage() {
           )}
 
           {/* Section: People You May Know / Suggestions */}
-          {(activeTab === 'suggestions' || activeTab === 'all') && (
+          {activeTab === 'suggestions' && (
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                 <h3 style={{ fontSize: '20px', fontWeight: '700' }}>People You May Know</h3>
@@ -411,6 +440,99 @@ export default function FriendsPage() {
                     </div>
                   );
                 })}
+              </div>
+            </div>
+          )}
+
+          {/* Section: All Friends Directory */}
+          {activeTab === 'all' && (
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
+                <div>
+                  <h3 style={{ fontSize: '20px', fontWeight: '700' }}>All Friends</h3>
+                  <p style={{ fontSize: '13px', color: '#65676b' }}>{allMockUsers.length - 1} friends</p>
+                </div>
+                <div style={{ position: 'relative', width: '260px' }}>
+                  <i className="fa-solid fa-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '10px', color: '#65676b' }}></i>
+                  <input
+                    type="text"
+                    placeholder="Search Friends"
+                    value={friendsSearch}
+                    onChange={(e) => setFriendsSearch(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '8px 12px 8px 36px',
+                      borderRadius: '20px',
+                      border: '1px solid #ced0d4',
+                      outline: 'none',
+                      fontSize: '14px',
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+                  gap: '12px',
+                }}
+              >
+                {allMockUsers
+                  .filter((u) => u.id !== 'sumon-roy')
+                  .filter((u) => u.full_name.toLowerCase().includes(friendsSearch.toLowerCase()))
+                  .map((friend) => (
+                    <div
+                      key={friend.id}
+                      style={{
+                        backgroundColor: '#ffffff',
+                        borderRadius: '8px',
+                        padding: '12px',
+                        boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <Link
+                        href={`/profile/${friend.id}`}
+                        style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none', color: 'inherit', flex: 1, minWidth: 0 }}
+                      >
+                        <img
+                          src={friend.avatar_url}
+                          alt={friend.full_name}
+                          style={{ width: '60px', height: '60px', borderRadius: '50%', objectFit: 'cover' }}
+                        />
+                        <div style={{ minWidth: 0 }}>
+                          <p style={{ fontWeight: '600', fontSize: '15px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            {friend.full_name}
+                          </p>
+                          <p style={{ fontSize: '12px', color: '#65676b' }}>{friend.lives_in || 'Dhaka, Bangladesh'}</p>
+                        </div>
+                      </Link>
+
+                      <div style={{ display: 'flex', gap: '6px' }}>
+                        <button
+                          onClick={() => setActiveChat({ id: friend.id, name: friend.full_name, avatar: friend.avatar_url })}
+                          title="Message"
+                          style={{
+                            width: '36px',
+                            height: '36px',
+                            borderRadius: '50%',
+                            backgroundColor: '#e7f3ff',
+                            color: '#1877f2',
+                            border: 'none',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          <i className="fa-brands fa-facebook-messenger"></i>
+                        </button>
+                      </div>
+                    </div>
+                  ))}
               </div>
             </div>
           )}
