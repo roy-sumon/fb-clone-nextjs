@@ -12,8 +12,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.getItem('fb_dark_mode') === 'true') {
+                  document.documentElement.classList.add('dark-mode');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
         <link rel="icon" type="image/png" href="/images/fb-logo.png" />
         <link rel="shortcut icon" href="/images/fb-logo.png" />
         <link

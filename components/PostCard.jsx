@@ -229,8 +229,8 @@ export default function PostCard({ post, user, profile, onDelete }) {
             }}
           />
           <div className="post-name">
-            <p style={{ color: '#050505', fontWeight: 600, fontSize: '15px' }}>{authorName}</p>
-            <p style={{ color: '#65676b', fontSize: '12px' }}>
+            <p style={{ color: 'var(--fb-primary-text, #050505)', fontWeight: 600, fontSize: '15px' }}>{authorName}</p>
+            <p style={{ color: 'var(--fb-secondary-text, #65676b)', fontSize: '12px' }}>
               {formatDate(post.created_at)} · <i className="fa-solid fa-earth-americas"></i>
             </p>
           </div>
@@ -249,10 +249,10 @@ export default function PostCard({ post, user, profile, onDelete }) {
                 position: 'absolute',
                 top: '36px',
                 right: '0',
-                backgroundColor: 'white',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
+                backgroundColor: 'var(--fb-card-bg, white)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
                 borderRadius: '8px',
-                border: '1px solid #ced0d4',
+                border: '1px solid var(--fb-border, #ced0d4)',
                 padding: '6px',
                 width: '180px',
                 zIndex: 20,
@@ -291,7 +291,7 @@ export default function PostCard({ post, user, profile, onDelete }) {
 
       {/* Post Text Content */}
       {post.content && (
-        <div style={{ padding: '0 16px 12px 16px', fontSize: '15px', color: '#050505', whiteSpace: 'pre-wrap' }}>
+        <div style={{ padding: '0 16px 12px 16px', fontSize: '15px', color: 'var(--fb-primary-text, #050505)', whiteSpace: 'pre-wrap' }}>
           <p>{post.content}</p>
         </div>
       )}

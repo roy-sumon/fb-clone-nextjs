@@ -1,5 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
 
+:root {
+  --fb-bg: #F0F2F5;
+  --fb-card-bg: #FFFFFF;
+  --fb-hover-bg: #e4e6eb;
+  --fb-input-bg: #f0f2f5;
+  --fb-primary-text: #050505;
+  --fb-secondary-text: #65676b;
+  --fb-border: #ced0d4;
+  --fb-divider: #e4e6eb;
+  --fb-blue: #1877F2;
+  --fb-nav-bg: #FFFFFF;
+  --fb-nav-icon: #65676b;
+  --fb-active-icon: #1877F2;
+  --fb-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+html.dark-mode,
+body.dark-mode {
+  --fb-bg: #18191a;
+  --fb-card-bg: #242526;
+  --fb-hover-bg: #3a3b3c;
+  --fb-input-bg: #3a3b3c;
+  --fb-primary-text: #e4e6eb;
+  --fb-secondary-text: #b0b3b8;
+  --fb-border: #393a3b;
+  --fb-divider: #393a3b;
+  --fb-blue: #2d88ff;
+  --fb-nav-bg: #242526;
+  --fb-nav-icon: #b0b3b8;
+  --fb-active-icon: #2d88ff;
+  --fb-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+
+  background-color: #18191a !important;
+  color: #e4e6eb !important;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,9 +44,10 @@
 }
 
 body {
-  background-color: #F0F2F5;
-  color: #050505;
+  background-color: var(--fb-bg);
+  color: var(--fb-primary-text);
   overflow-x: hidden;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .flex {
@@ -1121,4 +1158,270 @@ nav {
     position: static !important;
     border-bottom: 1px solid #ced0d4;
   }
+}
+
+/* =========================================================
+   8. AUTHENTIC FACEBOOK DARK MODE (NO NEGATIVE/INVERTED IMAGES)
+   ========================================================= */
+
+.app-page-wrapper {
+  background-color: var(--fb-bg);
+  min-height: 100vh;
+  transition: background-color 0.2s ease;
+}
+
+/* Navigation */
+.dark-mode nav {
+  background-color: #242526 !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4) !important;
+  border-bottom: 1px solid #393a3b !important;
+}
+
+.dark-mode .search-bar {
+  background-color: #3a3b3c !important;
+}
+
+.dark-mode .search-bar .searchbar-placeholder {
+  color: #e4e6eb !important;
+}
+
+.dark-mode .search-bar .searchbar-placeholder::placeholder {
+  color: #b0b3b8 !important;
+}
+
+.dark-mode .search-icon {
+  color: #b0b3b8 !important;
+}
+
+.dark-mode .midle-nav-bg:hover,
+.dark-mode .right-nav-icon:hover {
+  background-color: #3a3b3c !important;
+}
+
+.dark-mode .right-nav-icon {
+  background-color: #3a3b3c !important;
+  color: #e4e6eb !important;
+}
+
+.dark-mode .right-nav-icon i {
+  color: #e4e6eb !important;
+}
+
+.dark-mode .midle-icon {
+  color: #b0b3b8 !important;
+}
+
+.dark-mode .midle-nav-bg.active .midle-icon {
+  color: #2d88ff !important;
+}
+
+/* Sidebars */
+.dark-mode .main-left-content-bg:hover {
+  background-color: #3a3b3c !important;
+}
+
+.dark-mode .color,
+.dark-mode .margin-padding-title,
+.dark-mode .fb-dropdown-title,
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6 {
+  color: #e4e6eb !important;
+}
+
+.dark-mode .color-bold {
+  color: #ffffff !important;
+}
+
+.dark-mode .fb-dropdown-subtitle,
+.dark-mode .post-time,
+.dark-mode .friends-post-header-clock p,
+.dark-mode .post-like-count,
+.dark-mode .comment-timestamp,
+.dark-mode .birth-para {
+  color: #b0b3b8 !important;
+}
+
+/* Feed & Cards */
+.dark-mode .midle-search-box,
+.dark-mode .midle-storie-container,
+.dark-mode .friends-post-card,
+.dark-mode .post-container,
+.dark-mode .fb-dropdown-menu,
+.dark-mode .post-modal,
+.dark-mode .comments-drawer {
+  background-color: #242526 !important;
+  color: #e4e6eb !important;
+  border-color: #393a3b !important;
+}
+
+.dark-mode .midle-search-box .search-bar {
+  background-color: #3a3b3c !important;
+}
+
+.dark-mode .search-activity-icon:hover {
+  background-color: #3a3b3c !important;
+}
+
+.dark-mode .stories-reels-top-hover:hover {
+  background-color: #3a3b3c !important;
+}
+
+.dark-mode .stories-reels-top {
+  border-bottom-color: #393a3b !important;
+}
+
+.dark-mode .stories-div {
+  background-color: #242526 !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark-mode .stories-icon-div1 {
+  background-color: #242526 !important;
+  border-top: 1px solid #393a3b !important;
+}
+
+.dark-mode .stories-pTag {
+  color: #e4e6eb !important;
+}
+
+.dark-mode .like-comment-share:hover {
+  background-color: #3a3b3c !important;
+}
+
+.dark-mode .like-comment-share p {
+  color: #b0b3b8 !important;
+}
+
+.dark-mode .post-action-btn:hover {
+  background-color: #3a3b3c !important;
+}
+
+.dark-mode .reaction-dock {
+  background-color: #242526 !important;
+  border: 1px solid #393a3b !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+}
+
+.dark-mode .comment-bubble {
+  background-color: #3a3b3c !important;
+  color: #e4e6eb !important;
+}
+
+.dark-mode .comment-author {
+  color: #e4e6eb !important;
+}
+
+.dark-mode .comment-text {
+  color: #e4e6eb !important;
+}
+
+.dark-mode .comment-input {
+  background-color: #3a3b3c !important;
+  color: #e4e6eb !important;
+  border-color: #3e4042 !important;
+}
+
+.dark-mode .comment-input::placeholder {
+  color: #b0b3b8 !important;
+}
+
+.dark-mode hr,
+.dark-mode .hr,
+.dark-mode .hr-one,
+.dark-mode .hr-two {
+  border-color: #393a3b !important;
+}
+
+/* Chat & Messenger */
+.dark-mode .floating-chat-box {
+  background-color: #242526 !important;
+  border-color: #393a3b !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6) !important;
+}
+
+.dark-mode .floating-chat-header {
+  background-color: #242526 !important;
+  border-bottom: 1px solid #393a3b !important;
+}
+
+.dark-mode .chat-bubble-received {
+  background-color: #3a3b3c !important;
+  color: #e4e6eb !important;
+}
+
+.dark-mode .floating-chat-input-bar {
+  background-color: #242526 !important;
+  border-top: 1px solid #393a3b !important;
+}
+
+.dark-mode .floating-chat-input-bar input {
+  background-color: #3a3b3c !important;
+  color: #e4e6eb !important;
+}
+
+/* Modals & Dropdowns */
+.dark-mode .post-modal-header {
+  border-bottom-color: #393a3b !important;
+}
+
+.dark-mode .post-modal-close {
+  background-color: #3a3b3c !important;
+  color: #e4e6eb !important;
+}
+
+.dark-mode .post-modal-close:hover {
+  background-color: #4e4f50 !important;
+}
+
+.dark-mode .fb-dropdown-item:hover {
+  background-color: #3a3b3c !important;
+}
+
+.dark-mode .fb-dropdown-header {
+  border-bottom-color: #393a3b !important;
+}
+
+.dark-mode input[type="text"],
+.dark-mode input[type="search"],
+.dark-mode textarea,
+.dark-mode select {
+  background-color: #3a3b3c !important;
+  color: #e4e6eb !important;
+  border-color: #3e4042 !important;
+}
+
+.dark-mode input::placeholder,
+.dark-mode textarea::placeholder {
+  color: #b0b3b8 !important;
+}
+
+/* Profile and Friends Pages in Dark Mode */
+.dark-mode .friends-sidebar {
+  background-color: #242526 !important;
+  border-right-color: #393a3b !important;
+  box-shadow: 1px 0 2px rgba(0,0,0,0.3) !important;
+}
+
+/* ABSOLUTE RULE: NEVER INVERT IMAGES, VIDEOS, AVATARS, ICONS OR REELS */
+.dark-mode img,
+.dark-mode video,
+.dark-mode svg,
+.dark-mode canvas,
+.dark-mode iframe,
+.dark-mode picture,
+.dark-mode .fb-logo-image,
+.dark-mode .stories-image,
+.dark-mode .stories-image2,
+.dark-mode .stories-profile-img,
+.dark-mode .friends-post-image,
+.dark-mode .fb-dropdown-avatar,
+.dark-mode .comment-avatar,
+.dark-mode .post-author-avatar {
+  filter: none !important;
+  -webkit-filter: none !important;
+  mix-blend-mode: normal !important;
 }

@@ -257,7 +257,7 @@ export default function ProfilePage() {
   const friendsList = allMockUsers.filter((u) => u.id !== profileData.id).slice(0, 9);
 
   return (
-    <div style={{ backgroundColor: '#F0F2F5', minHeight: '100vh', paddingBottom: '40px' }}>
+    <div className="app-page-wrapper">
       <Navbar
         user={currentUser}
         profile={currentProfile}

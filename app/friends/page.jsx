@@ -84,7 +84,7 @@ export default function FriendsPage() {
   };
 
   return (
-    <div style={{ backgroundColor: '#F0F2F5', minHeight: '100vh', paddingBottom: '40px' }}>
+    <div className="app-page-wrapper">
       <Navbar user={user} profile={profile} onOpenChat={(u) => setActiveChat(u)} />
 
       <div

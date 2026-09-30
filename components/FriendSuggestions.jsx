@@ -24,7 +24,7 @@ export default function FriendSuggestions() {
   return (
     <div
       style={{
-        backgroundColor: '#ffffff',
+        backgroundColor: 'var(--fb-card-bg, #ffffff)',
         borderRadius: '8px',
         padding: '12px 16px',
         boxShadow: '0 1px 2px rgba(0,0,0,0.1)',
@@ -32,12 +32,12 @@ export default function FriendSuggestions() {
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-        <p style={{ fontWeight: '700', fontSize: '16px', color: '#050505' }}>
+        <p style={{ fontWeight: '700', fontSize: '16px', color: 'var(--fb-primary-text, #050505)' }}>
           People you may know
         </p>
         <Link
           href="/friends"
-          style={{ fontSize: '14px', color: '#1877f2', textDecoration: 'none', fontWeight: '500' }}
+          style={{ fontSize: '14px', color: 'var(--fb-blue, #1877f2)', textDecoration: 'none', fontWeight: '500' }}
         >
           See all
         </Link>
@@ -61,10 +61,10 @@ export default function FriendSuggestions() {
               style={{
                 width: '160px',
                 minWidth: '160px',
-                border: '1px solid #ced0d4',
+                border: '1px solid var(--fb-border, #ced0d4)',
                 borderRadius: '8px',
                 overflow: 'hidden',
-                backgroundColor: '#ffffff',
+                backgroundColor: 'var(--fb-card-bg, #ffffff)',
                 display: 'flex',
                 flexDirection: 'column',
                 boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
@@ -89,7 +89,7 @@ export default function FriendSuggestions() {
                   style={{
                     fontWeight: '600',
                     fontSize: '14px',
-                    color: '#050505',
+                    color: 'var(--fb-primary-text, #050505)',
                     textDecoration: 'none',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
@@ -99,7 +99,7 @@ export default function FriendSuggestions() {
                 >
                   {item.name}
                 </Link>
-                <p style={{ fontSize: '12px', color: '#65676b', margin: '2px 0 8px 0' }}>
+                <p style={{ fontSize: '12px', color: 'var(--fb-secondary-text, #65676b)', margin: '2px 0 8px 0' }}>
                   {item.mutual}
                 </p>
 

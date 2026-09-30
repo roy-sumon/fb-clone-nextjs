@@ -25,6 +25,22 @@ export default function Navbar({
   const [privacySetting, setPrivacySetting] = useState('Public');
   const [settingsSuccess, setSettingsSuccess] = useState(false);
 
+  const applyDarkMode = (isDark) => {
+    setDarkMode(isDark);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('fb_dark_mode', isDark ? 'true' : 'false');
+      if (isDark) {
+        document.documentElement.classList.add('dark-mode');
+        document.body.classList.add('dark-mode');
+      } else {
+        document.documentElement.classList.remove('dark-mode');
+        document.body.classList.remove('dark-mode');
+      }
+      document.body.style.filter = 'none'; // NEVER INVERT!
+      window.dispatchEvent(new Event('themeChanged'));
+    }
+  };
+
   useEffect(() => {
     const updateProfile = () => {
       if (typeof window !== 'undefined') {
@@ -39,6 +55,18 @@ export default function Navbar({
     };
     updateProfile();
     window.addEventListener('userProfileUpdated', updateProfile);
+
+    // Initial theme check
+    if (typeof window !== 'undefined') {
+      const isDark = localStorage.getItem('fb_dark_mode') === 'true';
+      if (isDark) {
+        setDarkMode(true);
+        document.documentElement.classList.add('dark-mode');
+        document.body.classList.add('dark-mode');
+      }
+      document.body.style.filter = 'none';
+    }
+
     return () => window.removeEventListener('userProfileUpdated', updateProfile);
   }, []);
 
@@ -459,6 +487,24 @@ export default function Navbar({
               <p>Settings & privacy</p>
             </div>
 
+            <div
+              className="fb-dropdown-item"
+              onClick={() => applyDarkMode(!darkMode)}
+              style={{ justifyContent: 'space-between' }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <i className="fa-solid fa-moon" style={{ fontSize: '18px', color: darkMode ? '#2d88ff' : '#65676b' }}></i>
+                <p>Dark mode</p>
+              </div>
+              <input
+                type="checkbox"
+                checked={darkMode}
+                onChange={(e) => applyDarkMode(e.target.checked)}
+                onClick={(e) => e.stopPropagation()}
+                style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+              />
+            </div>
+
             {user ? (
               <div
                 className="fb-dropdown-item"
@@ -569,14 +615,7 @@ export default function Navbar({
                 <input
                   type="checkbox"
                   checked={darkMode}
-                  onChange={(e) => {
-                    setDarkMode(e.target.checked);
-                    if (e.target.checked) {
-                      document.body.style.filter = 'invert(0.9) hue-rotate(180deg)';
-                    } else {
-                      document.body.style.filter = 'none';
-                    }
-                  }}
+                  onChange={(e) => applyDarkMode(e.target.checked)}
                   style={{ width: '18px', height: '18px', cursor: 'pointer' }}
                 />
               </div>

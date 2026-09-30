@@ -52,7 +52,7 @@ export default function FloatingChat({ chatUser, onClose }) {
             <div className="blue-light"></div>
           </div>
           <div>
-            <p style={{ fontWeight: '600', fontSize: '13px', color: '#050505' }}>{chatUser.name}</p>
+            <p style={{ fontWeight: '600', fontSize: '13px', color: 'var(--fb-primary-text, #050505)' }}>{chatUser.name}</p>
             <p style={{ fontSize: '11px', color: '#31a24c' }}>Active now</p>
           </div>
         </div>
@@ -64,7 +64,7 @@ export default function FloatingChat({ chatUser, onClose }) {
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              color: '#65676b',
+              color: 'var(--fb-secondary-text, #65676b)',
               fontSize: '16px',
               padding: '4px',
             }}
@@ -95,7 +95,8 @@ export default function FloatingChat({ chatUser, onClose }) {
           onChange={(e) => setInputText(e.target.value)}
           style={{
             flex: 1,
-            backgroundColor: '#f0f2f5',
+            backgroundColor: 'var(--fb-input-bg, #f0f2f5)',
+            color: 'var(--fb-primary-text, #050505)',
             border: 'none',
             borderRadius: '20px',
             padding: '8px 12px',
