@@ -1,8 +1,7 @@
 {
   "name": "fb-landingpage-clone",
   "version": "1.0.0",
-  "description": "",
-  "main": "script.js",
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/roy-sumon/fb-clone-using-html-css-only.git"
+    "url": "git+https://github.com/roy-sumon/fb-clone-nextjs.git"
   },
   "keywords": [],
   "author": "",
